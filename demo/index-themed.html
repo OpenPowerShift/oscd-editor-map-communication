@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>oscd-editor-map-communication demo (dark theme)</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&family=Roboto:wght@300;400;500&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Material+Symbols+Outlined&display=block"
+    />
+
+    <style>
+      * {
+        --oscd-theme-text-font: 'Roboto';
+        --oscd-theme-icon-font: 'Material Symbols Outlined';
+
+        margin: 0px;
+        padding: 0px;
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+
+      oscd-shell {
+        height: 100vh;
+      }
+
+      body {
+        background-color: #002b36;
+      }
+
+      /* A dark Solarized palette and custom service colours */
+      oscd-shell {
+        --oscd-theme-primary: #2aa198;
+        --oscd-theme-secondary: #d33682;
+        --oscd-theme-error: #dc322f;
+        --oscd-theme-base03: #fdf6e3;
+        --oscd-theme-base02: #eee8d5;
+        --oscd-theme-base01: #93a1a1;
+        --oscd-theme-base00: #839496;
+        --oscd-theme-base0: #657b83;
+        --oscd-theme-base1: #586e75;
+        --oscd-theme-base2: #073642;
+        --oscd-theme-base3: #002b36;
+        --oscd-theme-shape: 4px;
+
+        --oscd-editor-map-communication-goose-color: #6c71c4;
+        --oscd-editor-map-communication-sv-color: #b58900;
+        --oscd-editor-map-communication-report-color: #2aa198;
+      }
+    </style>
+  </head>
+  <body>
+    <oscd-shell></oscd-shell>
+
+    <script type="module">
+      import '@webcomponents/scoped-custom-element-registry';
+      import '@omicronenergy/oscd-shell/oscd-shell.js';
+      import { plugins } from './plugins.js';
+
+      const editor = document.querySelector('oscd-shell');
+      editor.plugins = plugins;
+
+      const params = new URL(document.location).searchParams;
+      for (const [name, value] of params) {
+        editor.setAttribute(name, value);
+      }
+
+      const filename = 'sample.scd';
+      const sample = await fetch(filename).then(r => r.text());
+      editor.docs = {
+        [filename]: new DOMParser().parseFromString(sample, 'application/xml'),
+      };
+      editor.docName = filename;
+    </script>
+  </body>
+</html>
