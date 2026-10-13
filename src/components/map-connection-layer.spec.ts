@@ -192,6 +192,14 @@ describe('map-connection-layer', () => {
     const choices = () => queryAll('.choice').map(c => c.getAttribute('data-id'));
     expect(choices()).to.have.members(['b', 'c']);
     expect(menu()!.open).to.equal(true);
+    // Clickable although the layer lets pointer events through.
+    expect(getComputedStyle(menu()!).pointerEvents).to.equal('auto');
+    const down = new PointerEvent('pointerdown', { bubbles: true, composed: true });
+    const panned = spy();
+    layer.addEventListener('pointerdown', panned);
+    query('.choice')!.dispatchEvent(down);
+    menu()!.dispatchEvent(new WheelEvent('wheel', { bubbles: true, composed: true }));
+    expect(panned.callCount).to.equal(0);
     expect(query('.chooser-title')?.textContent).to.contain('2 connections');
     expect(queryAll('.choice').map(c => c.textContent?.trim())).to.have.members([
       'b',

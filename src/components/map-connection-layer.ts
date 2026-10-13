@@ -307,6 +307,8 @@ export default class MapConnectionLayer extends ScopedElementsMixin(
         .open=${true}
         @close-menu=${this.handleChoice}
         @closed=${this.closeChoices}
+        @pointerdown=${(event: Event) => event.stopPropagation()}
+        @wheel=${(event: Event) => event.stopPropagation()}
       >
         <div class="chooser-title">
           ${msg(str`${choices.ids.length} connections here`)}
@@ -459,6 +461,15 @@ export default class MapConnectionLayer extends ScopedElementsMixin(
     .connection.previewed .arrow {
       fill: var(--oscd-map-highlight-color);
       stroke: var(--oscd-map-highlight-color);
+    }
+
+    /*
+     * The layer lets pointer events through to the diagram; the menu must
+     * take them again to be clicked (and must not start a pan).
+     */
+    .chooser {
+      pointer-events: auto;
+      cursor: default;
     }
 
     #chooser-anchor {
