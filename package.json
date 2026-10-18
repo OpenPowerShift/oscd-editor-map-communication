@@ -1,6 +1,6 @@
 {
   "name": "@openpowershift/oscd-editor-map-communication",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "OpenSCD editor plugin visualising GOOSE, Sampled Value and Report communication between IEDs on a single line diagram.",
   "type": "module",
   "repository": {
