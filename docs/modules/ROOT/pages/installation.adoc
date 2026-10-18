@@ -1,0 +1,32 @@
+= Get the plugin
+include::partial$base.adoc[]
+
+== Try the plugin online
+
+Open the {url-demo}[online demo].
+The demo opens a sample SCL file.
+The demo also loads the Single Line Diagram editor and the source editor.
+Use the menu to open your own SCL file.
+The file stays in your browser.
+
+The demo shows the latest version of the `main` branch.
+
+== Add the plugin to an OpenSCD distribution
+
+The plugin is an editor plugin.
+It uses the OpenSCD plugin API.
+
+To add the plugin, add this entry to the `editor` plugins of the distribution:
+
+[source,json,subs=+attributes]
+----
+{
+  "name": "{plugin-title}",
+  "icon": "hub",
+  "requireDoc": true,
+  "src": "{url-bundle}"
+}
+----
+
+The `src` URL is the bundle that CI builds from the `main` branch.
+To use a release, install the {url-npm}[npm package] and set `src` to its bundle.

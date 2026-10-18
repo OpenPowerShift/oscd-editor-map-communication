@@ -1,0 +1,48 @@
+= Select an IED
+include::partial$base.adoc[]
+
+When you select an IED, the map shows only the connections of that IED.
+The plugin also highlights the primary equipment that is allocated to the IED.
+
+== Select an IED
+
+To select an IED, do one of these steps:
+
+* Click the IED symbol on the map.
+* Push the kbd:[Tab] key until the IED is selected, then push kbd:[Enter] or the space bar.
+
+The toolbar shows the IED name.
+The map shows only the connections of the IED.
+
+.To select an IED
+image::map-ied-selected.png[The map with one IED selected. The toolbar shows the IED name and the Receives and Sends buttons.]
+
+== Receives and sends
+
+An IED both receives and sends connections.
+Use the btn:[Receives] and btn:[Sends] buttons to show one direction only.
+
+* Push btn:[Receives] to show or hide the connections that the IED receives.
+* Push btn:[Sends] to show or hide the connections that the IED sends.
+
+A button shows in colour when its direction is shown.
+The plugin shows the connections of both directions by default.
+
+== Highlighted equipment
+
+The plugin highlights the primary equipment with a logical node that is allocated to the selected IED.
+The highlight uses the highlight colour of the theme.
+
+== Clear the selection
+
+To clear the selection, do one of these steps:
+
+* Push the kbd:[Escape] key.
+* Push the cross on the IED name in the toolbar.
+
+The plugin shows the connections of all IEDs again.
+
+== Filter the options of the selected IED
+
+When an IED is selected, the filter panel offers only the values that the connections of the IED use.
+For more information, refer to xref:filtering_connections.adoc[].

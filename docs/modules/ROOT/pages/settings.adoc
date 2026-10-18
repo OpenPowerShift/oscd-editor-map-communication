@@ -1,0 +1,32 @@
+= Settings that the plugin keeps
+include::partial$base.adoc[]
+
+The plugin keeps some settings in the browser.
+Each browser keeps its own settings.
+
+== Map settings
+
+The plugin keeps these settings:
+
+* The shown services.
+* The labels choice.
+* The open or closed state of the filter panel.
+* The zoom of the map.
+
+The plugin restores these settings the next time that you open the plugin.
+
+== Connection details settings
+
+The connection details dialog keeps these settings:
+
+* The open or closed state of the *Message information* section.
+* The state of the *Show quality* switch.
+
+== Settings that the plugin does not keep
+
+The plugin does not keep these items:
+
+* The selected IED.
+* The filter criteria in the filter panel.
+
+The plugin clears these items when you open a file or the plugin again.

@@ -1,0 +1,35 @@
+= Export images
+include::partial$base.adoc[]
+
+You can save the map as a file.
+The exported file shows the map as it is on the screen: the theme colours, the connections and the filters.
+
+== Export the map
+
+. Push btn:[Export image] in the toolbar.
+. Select the area and the format in the menu.
+
+.The Export image menu
+image::map-export-menu.png[The Export image menu with the Whole diagram and Visible area groups and the three formats.]
+
+The menu has two groups:
+
+* *Whole diagram* saves the whole substation.
+* *Visible area* saves only the part of the map that is on the screen.
++
+Each group has three formats:
+
+* *SVG* saves a vector drawing.
+* *PNG* saves a picture.
+* *PDF* saves a document.
+
+The plugin saves the file with the name of the document, the substation and the text `communication`.
+The file of the visible area has the text `view` in its name.
+
+== Notes
+
+* The export includes the connections that the filter shows.
+* The export includes the theme colours of the screen.
+* The export works without a network connection.
+* The plugin writes the PDF file itself.
+The PDF has one page the size of the drawing.

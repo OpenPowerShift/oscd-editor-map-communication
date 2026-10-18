@@ -1,0 +1,50 @@
+= Keyboard shortcuts
+include::partial$base.adoc[]
+
+The map has keyboard shortcuts.
+On macOS, use the kbd:[Command] key instead of the kbd:[Ctrl] key.
+
+[cols="1,2"]
+|===
+|Keys |Action
+
+|kbd:[Ctrl+F] or kbd:[/]
+|Find an IED.
+For more information, refer to xref:finding_an_ied.adoc[].
+
+|kbd:[Ctrl+=], kbd:[Ctrl+-], kbd:[+], kbd:[-]
+|Zoom in or zoom out.
+
+|kbd:[Ctrl+0] or kbd:[0]
+|Zoom to fit.
+
+|kbd:[Ctrl+G]
+|Show or hide the GOOSE connections.
+
+|kbd:[Ctrl+S]
+|Show or hide the Sampled Values connections.
+
+|kbd:[Ctrl+R]
+|Show or hide the Report connections.
+
+|kbd:[Ctrl+[]
+|Show the previous substation.
+
+|kbd:[Ctrl+\]]
+|Show the next substation.
+
+|kbd:[F]
+|Open or close the filter panel.
+
+|kbd:[Ctrl+L] or kbd:[L]
+|Show or hide the labels.
+
+|kbd:[Escape]
+|Clear the IED selection.
+|===
+
+== Notes
+
+* The shortcuts act while the map has the focus.
+* A single key acts only outside a text field.
+* kbd:[Ctrl+Shift+F] is left to the OpenSCD shell.

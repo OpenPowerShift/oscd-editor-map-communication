@@ -1,0 +1,10 @@
+name: oscd-editor-map-communication
+title: Communication Map
+version: dev
+prerelease: true
+start_page: introduction.adoc
+asciidoc:
+  attributes:
+    prerelease: true
+nav:
+  - modules/ROOT/nav.adoc

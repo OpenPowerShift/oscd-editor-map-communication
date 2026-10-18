@@ -1,0 +1,111 @@
+= Connection details
+include::partial$base.adoc[]
+
+The connection details dialog shows the parameters and the inputs of one connection.
+You can also remove the inputs from the connection.
+
+== Open the dialog
+
+To open the dialog, do one of these steps:
+
+* Click the line of the connection on the map.
+* Push the connection in the list of the filter panel.
+
+.The connection details dialog
+image::map-connection-dialog.png[The connection details dialog with the message information and the table of inputs.]
+
+== The title
+
+The title of the dialog is the connection in this form:
+
+`<source>:<control block> ⮕ <target>`
+
+== Supervision
+
+When the receiving IED supervises the control block, the dialog shows the supervision.
+The line shows the name of the supervision logical node, for example `Supervision: LD0/LGOS1`.
+The plugin uses `LGOS` for GOOSE and `LSVS` for Sampled Values.
+
+== Message information
+
+The *Message information* section shows the parameters of the connection:
+
+[cols="1,1"]
+|===
+|Parameter |Content
+
+|Data set
+|The data set of the control block.
+
+|Configuration revision
+|The configuration revision of the control block.
+
+|GOOSE ID
+|The GOOSE identifier (`appID`) of a GOOSE control block.
+
+|SMV ID
+|The Sampled Values identifier (`smvID`) of a Sampled Values control block.
+
+|Report ID
+|The report identifier (`rptID`) of a Report control block.
+
+|VLAN ID
+|The VLAN identifier, for example `0x065 (101)`.
+
+|VLAN priority
+|The VLAN priority.
+
+|Application ID
+|The application identifier (`APPID`).
+
+|MAC address
+|The destination MAC address.
+
+|Minimum time
+|The minimum retransmission time.
+
+|Maximum time
+|The maximum retransmission time.
+|===
+
+The dialog shows only the parameters that the connection has.
+Push the section title to open or close it.
+The plugin keeps this choice for the next session.
+
+== Quality inputs
+
+Some inputs subscribe to the quality attribute `q`.
+Push the *Show quality* switch to show or hide these inputs.
+The plugin keeps this choice for the next session.
+
+== Inputs
+
+The table shows the inputs of the connection:
+
+[cols="1,2"]
+|===
+|Column |Content
+
+|Source
+|The published data of the input, for example `LD0/PTRC1.Tr.general`.
+When the plugin finds a description, it shows the description below the reference.
+
+|Destination
+|The internal address of the input, for example `P1Trip1`.
+When the input has a description, the plugin shows the description.
+|===
+
+Each row has a btn:[Remove input] button at the right.
+The plugin shows only the inputs that are bound to source data.
+
+== Remove inputs
+
+To remove one input, push its btn:[Remove input] button.
+To remove all the inputs, push btn:[Remove all].
+
+The plugin removes the input or the inputs from the SCL file.
+You can undo the change with the OpenSCD undo function.
+
+== Close the dialog
+
+Push btn:[Close] to close the dialog.

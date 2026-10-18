@@ -1,0 +1,219 @@
+= Development
+include::partial$base.adoc[]
+:uri-nvm: https://github.com/creationix/nvm
+:uri-nvm-install: {uri-nvm}#installation
+:uri-openwc: https://github.com/open-wc/open-wc
+
+== License
+
+This plugin is a web component and follows the {uri-openwc}[open-wc] recommendations.
+
+This plugin uses the Apache License and is intended for you to use, study, share and improve.
+
+== Prerequisites
+
+This plugin uses Node.js and the npm package ecosystem and is verified to work on Linux.
+
+For development, you need Node.js (including npm, which is bundled with Node.js) on your system.
+
+To check whether you have Node.js installed, and which version, open a terminal and type:
+
+ $ node -v
+
+A good way to install Node.js is to use {uri-nvm}[nvm] (Node Version Manager), however system-wide installations may also work.
+
+If you are using Linux or macOS, follow {uri-nvm-install}[the nvm installation instructions] to set up nvm on your machine.
+
+Once you have installed nvm, open a *new* terminal and install the active Node.js LTS release using:
+
+ $ nvm install --lts
+
+Now that you have Node.js installed, you can install this plugin.
+
+== Clone and demo server
+
+Clone this repository using:
+
+[subs=+attributes]
+$ git clone {url-repo}
+
+Now, install dependencies:
+
+ $ npm i
+
+Start a demo server:
+
+ $ npm run start
+
+Now open http://localhost:8000/demo/ in your browser to use the plugin.
+The demo loads `oscd-shell`, the Single Line Diagram editor and the source editor.
+
+== Using this package
+
+[source,bash]
+----
+npm install @openpowershift/oscd-editor-map-communication
+----
+
+Register the plugin with your OpenSCD distribution, for example:
+
+[source,js]
+----
+import OscdEditorMapCommunication from '@openpowershift/oscd-editor-map-communication';
+
+registry.define('oscd-editor-map-communication', OscdEditorMapCommunication);
+----
+
+== Documentation
+
+The user documentation is an https://antora.org[Antora] component in `docs/`.
+The pages are in `docs/modules/ROOT/pages`, and `docs/antora.yml` describes the component.
+The Markdown files in `docs/` are notes for developers, and Antora does not use them.
+
+The screenshots in the documentation are the screenshot test baselines.
+Each image in `docs/modules/ROOT/images` is a relative symbolic link to a file in `test/screenshots/baseline`.
+When CI updates a baseline, the documentation shows the new image.
+
+To add a screenshot to the documentation:
+
+. Add a screenshot test for the state, see <<screenshot-tests>>.
+. Add the `update-visual-baselines` label to the pull request, so that CI makes the baseline.
+. Link the baseline into the documentation:
++
+ $ cd docs/modules/ROOT/images
+ $ ln -s "../../../../test/screenshots/baseline/<test name>-Chromium.png" <short-name>.png
+
+The baselines are normal Git files, not Git LFS files.
+Antora reads the repository with Git, and it cannot get Git LFS files.
+
+The documentation site is built by the `sysconex-docs` playbook, which collects the components of several plugins.
+
+== Linting and formatting
+
+To scan the project for linting and formatting errors, run:
+
+ $ npm run lint
+
+To automatically fix linting and formatting errors, run:
+
+ $ npm run format
+
+== Tooling
+
+Build, lint, test and bundling are provided by the shared `oscd` command from `@omicronenergy/oscd-tooling`.
+The npm scripts in `package.json` call it, for example `npm run build` and `npm run bundle`.
+Formatting is done by the shared ESLint configuration, Prettier is not used.
+
+== Testing
+
+Tests use https://modern-web.dev/docs/test-runner/overview/[Web Test Runner] with Chromium.
+There are two kinds:
+
+`*.spec.ts`:: Fast unit and component tests, which is what `npm test` runs.
+`*.test.ts`:: A small set of screenshot tests, which are run with `npm run test:visual`.
+
+To execute the unit tests, with coverage:
+
+ $ npm test
+
+Coverage thresholds are enforced, the run fails if coverage falls below them (see `web-test-runner.config.js`).
+A coverage report is written to `coverage/lcov-report/index.html`.
+
+To run the tests in interactive watch mode:
+
+ $ npm run test:watch
+
+The tests are laid out as follows:
+
+`src/foundation/**/*.spec.ts`:: Unit tests for functions which work on SCL, filtering, routing and so on.
+`src/*.spec.ts` and `src/components/*.spec.ts`:: Component tests.
+These mount the plugin or one of its components and interact with them as a user does.
+`src/testing/`:: Helpers shared by specs, including `generate-scd.ts`, which builds a sample SCL file.
+
+[#screenshot-tests]
+=== Screenshot tests
+
+`src/oscd-editor-map-communication.test.ts` takes screenshots of the plugin's main visual states and compares them with baselines in `test/screenshots/baseline`.
+The states are the map, the filter panel, a selected IED, the connection details dialog, the IED search, the export menu and the empty states.
+Fonts come from the network, as in the shared test configuration.
+
+ $ npm run test:visual
+
+Rendering differs between operating systems, so the baselines are owned by CI.
+Do not create, update or commit them locally.
+When you add a screenshot test or change how the plugin looks on purpose, add the `update-visual-baselines` label to your pull request, which runs the `Update visual baselines` workflow and commits the images, and review them.
+The workflow can also be run by hand from the Actions tab once it is on the default branch.
+A screenshot without a baseline fails the run.
+Failures leave the new screenshot and a diff in `test/screenshots/failed`, which you can use to see what changed.
+
+== Building and bundling
+
+To build the TypeScript into `dist/`:
+
+ $ npm run build
+
+To build the bundle of the plugin and the demo:
+
+ $ npm run bundle
+
+To regenerate the sample SCL file `demo/sample.scd` from `src/testing/generate-scd.ts`:
+
+ $ npm run sample
+
+== Releasing
+
+Commit messages follow https://www.conventionalcommits.org/[Conventional Commits], which a git hook checks.
+Releases are created by release-please.
+When a release is made, CI publishes the package to npm and attaches the bundled plugin and demo to the GitHub release.
+
+[#theming]
+== Theming
+
+The plugin follows the OpenSCD theming model described in the `@openscd/oscd-api` documentation.
+All declarations live in `src/theme.ts`.
+The root component initialises the internal `--oscd-*` tokens from the distribution's `--oscd-theme-*` variables, with Solarized defaults.
+
+The service colours and the diagram opacity are plugin hooks:
+
+[cols="2,1,2"]
+|===
+|Hook |Default |Affects
+
+|`--oscd-editor-map-communication-goose-color`
+|`#268bd2`
+|GOOSE connections and the GOOSE service button.
+
+|`--oscd-editor-map-communication-sv-color`
+|`#cb4b16`
+|Sampled Values connections and the Sampled Values service button.
+
+|`--oscd-editor-map-communication-report-color`
+|`#859900`
+|Report connections and the Reports service button.
+
+|`--oscd-editor-map-communication-highlight-color`
+|`--oscd-theme-secondary`
+|Selected IED, hovered or selected connection, linked equipment.
+
+|`--oscd-editor-map-communication-diagram-opacity`
+|`0.7`
+|Opacity of the equipment, wiring, bays and their labels.
+|===
+
+Set a hook on the plugin element, a host shell or `:root`:
+
+[source,css]
+----
+oscd-editor-map-communication {
+  --oscd-editor-map-communication-goose-color: #0077cc;
+}
+----
+
+== Continuous integration
+
+Self-contained GitHub Actions workflows:
+
+* `test.yml`: on every push and pull request, build, lint, unit tests with coverage and bundle.
+* `update-visual-baselines.yml`: updates the screenshot baselines when the `update-visual-baselines` label is added to a pull request, or when it is run by hand.
+* `release-please.yml`: release pull requests from Conventional Commits, then publishing to npm and the GitHub release.
+* `continuous-deployment.yml`: on every push to `main`, publishes the bundled demo to GitHub Pages.

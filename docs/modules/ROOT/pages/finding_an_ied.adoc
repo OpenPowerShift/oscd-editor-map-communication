@@ -1,0 +1,35 @@
+= Find an IED
+include::partial$base.adoc[]
+
+Use the btn:[Find IED] field in the toolbar to find an IED on a diagram.
+
+== Find an IED
+
+. Click the btn:[Find IED] field, or push kbd:[Ctrl+F].
+. Type a few characters of the IED name or description.
++
+The plugin lists the best matches below the field.
+The list shows at most eight IEDs.
+The IEDs of the shown substation come first.
+. Do one of these steps:
+* Push kbd:[Enter] to open the best match.
+* Push kbd:[ArrowDown], then select an IED in the list.
+
+The plugin shows the substation of the IED.
+It zooms in when the diagram is small, and centres the IED.
+The IED pulses for a moment.
+
+.The search field with matching IEDs
+image::map-ied-search.png[The Find IED field with three matching IEDs listed below it.]
+
+The list shows the description of an IED and the name of its substation when these differ from the shown substation.
+
+== No match
+
+When no IED matches, the list shows `No IED found`.
+Change the text in the field.
+
+== Close the search
+
+To close the list, push kbd:[Escape].
+Push kbd:[Escape] again to clear the text.

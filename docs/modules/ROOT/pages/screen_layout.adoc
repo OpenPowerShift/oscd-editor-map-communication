@@ -1,0 +1,97 @@
+= The screen
+include::partial$base.adoc[]
+
+.The parts of the screen
+image::map-initially.png[The map with the toolbar above the diagram and connection lines between the IEDs.]
+
+The screen has two parts:
+
+* The toolbar at the top.
+* The map below the toolbar.
+
+The filter panel appears at the right of the map when you open it.
+
+== Toolbar
+
+The toolbar has these controls, from left to right:
+
+[cols="1,3"]
+|===
+|Control |Function
+
+|Substation
+|Selects the substation shown.
+This control appears only when the file has more than one substation.
+
+|GOOSE
+|Shows or hides the GOOSE connections.
+
+|Sampled Values
+|Shows or hides the Sampled Values connections.
+
+|Reports
+|Shows or hides the Report connections.
+
+|Find IED
+|Finds an IED on the diagram.
+For more information, refer to xref:finding_an_ied.adoc[].
+
+|Zoom out
+|Shows the diagram smaller.
+
+|Zoom in
+|Shows the diagram larger.
+
+|Zoom to fit
+|Shows the whole diagram.
+For more information, refer to xref:map.adoc#zoom-and-pan[Zoom and pan].
+
+|Export image
+|Saves the map as a file.
+For more information, refer to xref:exporting_images.adoc[].
+
+|Full screen
+|Shows the map and the toolbar on the whole screen.
+Push btn:[Exit full screen] to leave full screen.
+
+|Show labels
+|Shows or hides the labels of the equipment, bays and voltage levels.
+
+|Filter connections
+|Opens or closes the filter panel.
+For more information, refer to xref:filtering_connections.adoc[].
+|===
+
+When you select an IED, the toolbar also shows the IED name and the btn:[Receives] and btn:[Sends] buttons.
+For more information, refer to xref:selecting_an_ied.adoc[].
+
+The btn:[Filter connections] button shows a number when filters are active.
+The number is the count of the active filter criteria.
+
+== Map
+
+The map shows the single line diagram of one substation.
+The plugin draws the connections on top of the diagram.
+
+The primary diagram is slightly faded.
+Thus the IEDs and the connections are easier to see.
+
+When the plugin searches the connection routes, it shows the message `Optimising connection routes…`.
+The plugin first shows a preview of the routes.
+Then it replaces the preview with the searched routes.
+
+== Messages
+
+The plugin shows a message when it cannot draw the map.
+
+.No IEDs are placed on the diagram
+image::map-no-ieds.png[The map with the message No IEDs are placed on the diagram yet.]
+
+.No connections are found
+image::map-no-connections.png[The map with the message that no connections are found.]
+
+.The diagram format is outdated
+image::map-legacy.png[The message that asks you to open the file in the Single Line Diagram editor.]
+
+.No document is loaded
+image::map-no-document.png[The message No document loaded.]

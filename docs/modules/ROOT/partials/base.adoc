@@ -1,0 +1,10 @@
+:plugin-name: oscd-editor-map-communication
+:plugin-title: Communication Map
+:url-repo: https://github.com/OpenPowerShift/oscd-editor-map-communication
+:url-issues: https://github.com/OpenPowerShift/oscd-editor-map-communication/issues
+:url-chat: https://openscd.zulipchat.com/
+:url-demo: https://openpowershift.github.io/oscd-editor-map-communication/
+:url-bundle: https://openpowershift.github.io/oscd-editor-map-communication/oscd-editor-map-communication.js
+:url-npm: https://www.npmjs.com/package/@openpowershift/oscd-editor-map-communication
+:sectnums:
+:experimental:
